@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Web.Mvc;
 using Cars.Administration.Web.Domain;
 using Cars.Administration.Web.Filters;
 using Cars.Administration.Web.Helpers;
 using Cars.Administration.Web.Infrastructure;
 using Cars.Administration.Web.Repository;
+using Microsoft.Web.Mvc;
 
 namespace Cars.Administration.Web.Controllers
 {
@@ -42,9 +42,7 @@ namespace Cars.Administration.Web.Controllers
             };
             _carRepository.Insert(car);
 
-            throw new Exception();
-
-            return RedirectToAction("Index", "Home");
+            return this.RedirectToAction<HomeController>(c => c.Index());
         }
 
         [HttpGet, Log("Deleted car {carId}")]
@@ -54,7 +52,8 @@ namespace Cars.Administration.Web.Controllers
             var car = _carRepository.Get(id);
             if (!car.IsNull())
                 _carRepository.Delete(car);
-            return RedirectToAction("Index", "Home");
+
+            return this.RedirectToAction<HomeController>(c => c.Index());
         }
     }
 }
