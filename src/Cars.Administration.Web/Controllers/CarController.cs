@@ -4,6 +4,7 @@ using Cars.Administration.Web.Domain;
 using Cars.Administration.Web.Filters;
 using Cars.Administration.Web.Helpers;
 using Cars.Administration.Web.Infrastructure;
+using Cars.Administration.Web.Infrastructure.Alerts;
 using Cars.Administration.Web.Repository;
 using Microsoft.Web.Mvc;
 
@@ -42,7 +43,7 @@ namespace Cars.Administration.Web.Controllers
             };
             _carRepository.Insert(car);
 
-            return this.RedirectToAction<HomeController>(c => c.Index());
+            return this.RedirectToAction<HomeController>(c => c.Index()).WithSuccess("Car created!");
         }
 
         [HttpGet, Log("Deleted car {carId}")]
