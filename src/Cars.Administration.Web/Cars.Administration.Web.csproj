@@ -136,12 +136,14 @@
     <Compile Include="Domain\ApplicationUser.cs" />
     <Compile Include="Domain\Car.cs" />
     <Compile Include="Domain\LogAction.cs" />
+    <Compile Include="Filters\CurrencySelectListPopulatorAttribute.cs" />
     <Compile Include="Filters\LogAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\TypeExtensions.cs" />
     <Compile Include="Infrastructure\ActionFilterRegistry.cs" />
+    <Compile Include="Infrastructure\CarAdministrationController.cs" />
     <Compile Include="Infrastructure\ControllerConvention.cs" />
     <Compile Include="Infrastructure\ControllerRegistry.cs" />
     <Compile Include="Infrastructure\CurrentUser.cs" />
@@ -163,6 +165,7 @@
     <Compile Include="Infrastructure\Tasks\TaskRegistry.cs" />
     <Compile Include="Infrastructure\TransactionPerRequest.cs" />
     <Compile Include="Models\CarViewModel.cs" />
+    <Compile Include="Models\FormModels\CreateCarForm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Infrastructure\RepositoryRegistry.cs" />
     <Compile Include="Repository\CarRepository.cs" />

@@ -1,13 +1,13 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
+using AutoMapper;
+using Cars.Administration.Web.Infrastructure;
 using Cars.Administration.Web.Models;
 using Cars.Administration.Web.Repository;
-using AutoMapper;
-using AutoMapper.QueryableExtensions;
 
 namespace Cars.Administration.Web.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : CarAdministrationController
     {
         private readonly ICarRepository _carRepository;
 

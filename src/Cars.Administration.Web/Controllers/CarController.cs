@@ -1,16 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Web.Mvc;
 using Cars.Administration.Web.Domain;
 using Cars.Administration.Web.Filters;
 using Cars.Administration.Web.Helpers;
 using Cars.Administration.Web.Infrastructure;
 using Cars.Administration.Web.Infrastructure.Alerts;
+using Cars.Administration.Web.Models.FormModels;
 using Cars.Administration.Web.Repository;
 using Microsoft.Web.Mvc;
 
 namespace Cars.Administration.Web.Controllers
 {
-    public class CarController: Controller
+    public class CarController: CarAdministrationController 
     {
         private readonly ICarRepository _carRepository;
         private readonly ILog _log;
@@ -23,11 +26,11 @@ namespace Cars.Administration.Web.Controllers
             _currentUser = currentUser;
         }
 
-        
         [HttpGet]
         public ActionResult Create()
         {
-            return View();
+            var form = new CreateCarForm();
+            return View(form);
         }
 
         [HttpPost, ValidateAntiForgeryToken, Log("Created car")]
@@ -42,8 +45,8 @@ namespace Cars.Administration.Web.Controllers
                 Currency = currency
             };
             _carRepository.Insert(car);
-
-            return this.RedirectToAction<HomeController>(c => c.Index()).WithSuccess("Car created!");
+ 
+            return RedirectToAction<HomeController>(c => c.Index()).WithSuccess("Car created!");
         }
 
         [HttpGet, Log("Deleted car {carId}")]
