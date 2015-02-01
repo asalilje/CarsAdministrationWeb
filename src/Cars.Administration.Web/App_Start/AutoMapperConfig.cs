@@ -20,7 +20,7 @@ namespace Cars.Administration.Web
             LoadCustomMappings(types);
         }
 
-        private void LoadCustomMappings(Type[] types)
+        private void LoadCustomMappings(IEnumerable<Type> types)
         {
             var maps = (from t in types
                 where typeof (IHaveCustomMappings).IsAssignableFrom(t)
