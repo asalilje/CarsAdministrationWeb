@@ -18,17 +18,17 @@ namespace Cars.Administration.Web.Infrastructure
 
         void IRunOnEachRequest.Execute()
         {
-    
+            // start transaction
         }
 
         void IRunOnError.Execute()
         {
-
+            // set error flag in context
         }
 
         void IRunAfterEachRequest.Execute()
         {
-     
+            // commit or rollback
         }
     }
 }

@@ -22,6 +22,7 @@ namespace Cars.Administration.Web.Controllers
             _currentUser = currentUser;
         }
 
+        
         [HttpGet]
         public ActionResult Create()
         {

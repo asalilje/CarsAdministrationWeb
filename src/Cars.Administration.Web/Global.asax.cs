@@ -43,10 +43,6 @@ namespace Cars.Administration.Web
 
             using (var container = ObjectFactory.Container.GetNestedContainer())
             {
-                foreach (var task in container.GetAllInstances<IRunAtInit>())
-                {
-                    task.Execute();
-                }
                 foreach (var task in container.GetAllInstances<IRunAtStartup>())
                 {
                     task.Execute();

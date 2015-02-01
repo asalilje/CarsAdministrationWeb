@@ -39,6 +39,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Net4, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="StructureMap">
       <HintPath>..\packages\structuremap.3.1.4.143\lib\net40\StructureMap.dll</HintPath>
@@ -116,6 +124,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\AutoMapperConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -135,6 +144,8 @@
     <Compile Include="Infrastructure\ControllerRegistry.cs" />
     <Compile Include="Infrastructure\CurrentUser.cs" />
     <Compile Include="Infrastructure\ICurrentUser.cs" />
+    <Compile Include="Infrastructure\Mapping\IHaveCustomMappings.cs" />
+    <Compile Include="Infrastructure\Mapping\IMapFrom.cs" />
     <Compile Include="Infrastructure\MvcRegistry.cs" />
     <Compile Include="Infrastructure\StandardRegistry.cs" />
     <Compile Include="Infrastructure\StructureMapDependencyResolver.cs" />
@@ -142,11 +153,11 @@
     <Compile Include="Infrastructure\Tasks\IRunAfterEachRequest.cs" />
     <Compile Include="Infrastructure\Tasks\IRunOnEachRequest.cs" />
     <Compile Include="Infrastructure\Tasks\IRunOnError.cs" />
-    <Compile Include="Infrastructure\Tasks\IRunAtInit.cs" />
     <Compile Include="Infrastructure\Tasks\IRunAtStartup.cs" />
     <Compile Include="Infrastructure\Tasks\SeedCars.cs" />
     <Compile Include="Infrastructure\Tasks\TaskRegistry.cs" />
     <Compile Include="Infrastructure\TransactionPerRequest.cs" />
+    <Compile Include="Models\CarViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Infrastructure\RepositoryRegistry.cs" />
     <Compile Include="Repository\CarRepository.cs" />
@@ -192,7 +203,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
     <Folder Include="Views\Default\" />
   </ItemGroup>
   <ItemGroup>
@@ -229,6 +239,7 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <Import Project="..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

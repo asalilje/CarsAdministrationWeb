@@ -11,7 +11,6 @@ namespace Cars.Administration.Web.Infrastructure.Tasks
             Scan(scan =>
             {
                 scan.AssembliesFromApplicationBaseDirectory(a => a.FullName.StartsWith("Cars"));
-                scan.AddAllTypesOf(typeof(IRunAtInit));
                 scan.AddAllTypesOf<IRunAfterEachRequest>();
                 scan.AddAllTypesOf(typeof(IRunAtStartup));
                 scan.AddAllTypesOf<IRunOnEachRequest>();
@@ -19,6 +18,4 @@ namespace Cars.Administration.Web.Infrastructure.Tasks
             });
         }
     }
-
-   
 }
