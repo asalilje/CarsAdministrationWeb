@@ -39,7 +39,7 @@
 				@Html.DisplayFor(modelItem => item.RentalPricePerDay)
 			</td>
 			<td>
-				@Html.DisplayFor(modelItem => item.Currency)
+				@Html.EditorFor(modelItem => item.Currency)
 			</td>
 			<td>
 				@Html.ActionLink("Delete", "Delete", "Car", new { carId = item.CarId }, null)

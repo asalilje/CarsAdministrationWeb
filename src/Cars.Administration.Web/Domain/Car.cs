@@ -1,8 +1,10 @@
 ﻿using System;
+using Cars.Administration.Web.Infrastructure.Mapping;
+using Cars.Administration.Web.Models.FormModels;
 
 namespace Cars.Administration.Web.Domain
 {
-    public class Car
+    public class Car : IMapFrom<CreateCarForm>
     {
 
         public Guid CarId { get; set; }

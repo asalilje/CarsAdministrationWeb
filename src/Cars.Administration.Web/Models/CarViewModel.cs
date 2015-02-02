@@ -10,14 +10,13 @@ namespace Cars.Administration.Web.Models
     {
         public string Make { get; set; }
 
-				[Display(Name = "Rental price per day")]
 				public string RentalPricePerDay { get; set; }
 
+				[DataType("Money")]
         public string Currency { get; set; }
 
         public Guid CarId { get; set; }
 
-				[Display(Name = "Transmission")]
 				public TransmissionType TransmissionType { get; set; }
 
         public void CreateMappings(IConfiguration configuration)

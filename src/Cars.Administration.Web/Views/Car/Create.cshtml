@@ -1,5 +1,4 @@
-﻿@using Cars.Administration.Web.Helpers.HtmlHelpers
-@using Microsoft.Web.Mvc
+﻿@using Microsoft.Web.Mvc
 @model Cars.Administration.Web.Models.FormModels.CreateCarForm
 
 @{
@@ -13,6 +12,8 @@
 	@Html.AntiForgeryToken()
 
 	@Html.ValidationSummary(true, "", new {@class = "text-danger"})
+
+	@*@Html.EditorForModel()*@
 
 	<div class="form-group">
 		@Html.BootstrapLabelFor(m => m.Make)<br/>

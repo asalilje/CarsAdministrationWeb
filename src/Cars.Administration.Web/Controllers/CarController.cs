@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.Mvc;
+using AutoMapper;
 using Cars.Administration.Web.Domain;
 using Cars.Administration.Web.Filters;
 using Cars.Administration.Web.Helpers;
@@ -10,51 +11,43 @@ using Cars.Administration.Web.Repository;
 
 namespace Cars.Administration.Web.Controllers
 {
-    public class CarController: CarAdministrationController 
-    {
-        private readonly ICarRepository _carRepository;
-       
-        public CarController(ICarRepository carRepository)
-        {
-            _carRepository = carRepository;
-        }
+	public class CarController : CarAdministrationController
+	{
+		private readonly ICarRepository _carRepository;
 
-        [HttpGet]
-        public ActionResult Create()
-        {
-            var form = new CreateCarForm();
-            return View(form);
-        }
+		public CarController(ICarRepository carRepository)
+		{
+			_carRepository = carRepository;
+		}
 
-        [HttpPost, ValidateAntiForgeryToken, Log("Created car")]
-        public ActionResult Create(CreateCarForm form)
-        {
-            if (!ModelState.IsValid)
-                return View(form);
-            
-            var car = new Car
-            {
-                CarId = Guid.NewGuid(),
-                Make = form.Make,
-                RentalPricePerDay = form.RentalPricePerDay,
-                Currency = form.Currency, 
-								Notes = form.Notes,
-								TransmissionType = form.TransmissionType
-            };
-            _carRepository.Insert(car);
+		[HttpGet]
+		public ActionResult Create()
+		{
+			var form = new CreateCarForm();
+			return View(form);
+		}
 
-            return RedirectToAction<HomeController>(c => c.Index()).WithSuccess("Car created!");
-        }
+		[HttpPost, ValidateAntiForgeryToken, Log("Created car")]
+		public ActionResult Create(CreateCarForm form)
+		{
+			if (!ModelState.IsValid)
+				return View(form);
 
-        [HttpGet, Log("Deleted car {carId}")]
-        public ActionResult Delete(string carId)
-        {
-            var id = Guid.Parse(carId);
-            var car = _carRepository.Get(id);
-            if (!car.IsNull())
-                _carRepository.Delete(car);
+			var car = Mapper.Map<Car>(form);
+			_carRepository.Insert(car);
 
-            return this.RedirectToAction<HomeController>(c => c.Index()).WithSuccess("Car deleted!");
-        }
-    }
+			return RedirectToAction<HomeController>(c => c.Index()).WithSuccess("Car created!");
+		}
+
+		[HttpGet, Log("Deleted car {carId}")]
+		public ActionResult Delete(string carId)
+		{
+			var id = Guid.Parse(carId);
+			var car = _carRepository.Get(id);
+			if (!car.IsNull())
+				_carRepository.Delete(car);
+
+			return this.RedirectToAction<HomeController>(c => c.Index()).WithSuccess("Car deleted!");
+		}
+	}
 }
