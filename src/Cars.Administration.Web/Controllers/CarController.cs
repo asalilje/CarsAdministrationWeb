@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
 using System.Web.Mvc;
 using Cars.Administration.Web.Domain;
 using Cars.Administration.Web.Filters;
@@ -9,21 +7,16 @@ using Cars.Administration.Web.Infrastructure;
 using Cars.Administration.Web.Infrastructure.Alerts;
 using Cars.Administration.Web.Models.FormModels;
 using Cars.Administration.Web.Repository;
-using Microsoft.Web.Mvc;
 
 namespace Cars.Administration.Web.Controllers
 {
     public class CarController: CarAdministrationController 
     {
         private readonly ICarRepository _carRepository;
-        private readonly ILog _log;
-        private readonly ICurrentUser _currentUser;
-
-        public CarController(ICarRepository carRepository, ILog log, ICurrentUser currentUser)
+       
+        public CarController(ICarRepository carRepository)
         {
             _carRepository = carRepository;
-            _log = log;
-            _currentUser = currentUser;
         }
 
         [HttpGet]
@@ -34,18 +27,22 @@ namespace Cars.Administration.Web.Controllers
         }
 
         [HttpPost, ValidateAntiForgeryToken, Log("Created car")]
-        public ActionResult Create(string make, string rentalPricePerDay, string currency)
+        public ActionResult Create(CreateCarForm form)
         {
-            var user = _currentUser.User;
+            if (!ModelState.IsValid)
+                return View(form);
+            
             var car = new Car
             {
                 CarId = Guid.NewGuid(),
-                Make = make,
-                RentalPricePerDay = rentalPricePerDay.ToDecimal(),
-                Currency = currency
+                Make = form.Make,
+                RentalPricePerDay = form.RentalPricePerDay,
+                Currency = form.Currency, 
+								Notes = form.Notes,
+								TransmissionType = form.TransmissionType
             };
             _carRepository.Insert(car);
- 
+
             return RedirectToAction<HomeController>(c => c.Index()).WithSuccess("Car created!");
         }
 
@@ -57,7 +54,7 @@ namespace Cars.Administration.Web.Controllers
             if (!car.IsNull())
                 _carRepository.Delete(car);
 
-            return this.RedirectToAction<HomeController>(c => c.Index());
+            return this.RedirectToAction<HomeController>(c => c.Index()).WithSuccess("Car deleted!");
         }
     }
 }

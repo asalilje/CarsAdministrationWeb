@@ -13,6 +13,9 @@ namespace Cars.Administration.Web.Domain
 
         public string Currency { get; set; }
 
+        public string Notes { get; set; }
+
+				public TransmissionType TransmissionType { get; set; } 
 
     }
 

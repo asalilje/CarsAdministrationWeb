@@ -1,40 +1,54 @@
-﻿@model Cars.Administration.Web.Models.FormModels.CreateCarForm
+﻿@using Cars.Administration.Web.Helpers.HtmlHelpers
+@using Microsoft.Web.Mvc
+@model Cars.Administration.Web.Models.FormModels.CreateCarForm
 
 @{
-    ViewBag.Title = "Create new car";
+	ViewBag.Title = "Create new car";
 }
 
 <h2>Create Car</h2>
 
-
 @using (Html.BeginForm())
 {
-    @Html.AntiForgeryToken()
+	@Html.AntiForgeryToken()
 
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+	@Html.ValidationSummary(true, "", new {@class = "text-danger"})
 
-        <div class="form-group">
-            <label class="control-label">Make</label><br/>
-            <input name="Make" type="text" placeholder="Make" class="form-control input-lg"/>
-        </div>
+	<div class="form-group">
+		@Html.BootstrapLabelFor(m => m.Make)<br/>
+		@Html.EditorFor(m => m.Make)
+		@Html.ValidationMessageFor(m => m.Make)
+	</div>
 
-        <div class="form-group">
-            <label class="control-label">Rental Price Per Day</label><br/>
-            <input name="RentalPricePerDay" type="text" placeholder="RentalPricePerDay" class="form-control input-lg" />
-        </div>
+	<div class="form-group">
+		@Html.BootstrapLabelFor(m => m.TransmissionType)
+		@Html.EditorFor(m => m.TransmissionType)
+	</div>
 
-        <div class="form-group">
-            <label class="control-label">Currency</label><br/>
-            @Html.DropDownListFor(m => m.Currency, Model.AvailableCurrencies, new {@class = "form-control input-lg"})
-        </div>
+	<div class="form-group">
+		@Html.BootstrapLabelFor(m => m.RentalPricePerDay)
+		@Html.EditorFor(m => m.RentalPricePerDay)
+		@Html.ValidationMessageFor(m => m.RentalPricePerDay)
+	</div>
 
-        <div class="form-group">
-            <input type="submit" value="Create" class="btn btn-primary" />
-        </div>
+	<div class="form-group">
+		@Html.BootstrapLabelFor(m => m.Currency)
+		@Html.DropDownListFor(m => m.Currency, Model.AvailableCurrencies, new {@class = "form-control input-lg"})
+	</div>
+
+
+	<div class="form-group">
+		@Html.BootstrapLabelFor(m => m.Notes)
+		@Html.EditorFor(m => m.Notes)
+	</div>
+
+	<div class="form-group">
+		@Html.SubmitButton("Create", "Create car", new {@class = "btn btn-primary"})
+	</div>
 }
 
 
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+	@Scripts.Render("~/bundles/jqueryval")
 }

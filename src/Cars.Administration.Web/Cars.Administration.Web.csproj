@@ -135,12 +135,15 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Domain\ApplicationUser.cs" />
     <Compile Include="Domain\Car.cs" />
+    <Compile Include="Domain\CarType.cs" />
     <Compile Include="Domain\LogAction.cs" />
+    <Compile Include="Domain\TransmissionType.cs" />
     <Compile Include="Filters\CurrencySelectListPopulatorAttribute.cs" />
     <Compile Include="Filters\LogAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\HtmlHelpers\BootstrapHelpers.cs" />
     <Compile Include="Helpers\TypeExtensions.cs" />
     <Compile Include="Infrastructure\ActionFilterRegistry.cs" />
     <Compile Include="Infrastructure\CarAdministrationController.cs" />
@@ -209,6 +212,10 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Car\Create.cshtml" />
     <Content Include="Views\Shared\_Alerts.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\String.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\MultilineText.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\TransmissionType.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Decimal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
